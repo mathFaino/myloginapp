@@ -1,0 +1,158 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:firebase_core/firebase_core.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    Firebase.initializeApp();
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData.dark(
+        //primarySwatch: Colors.blue,
+      ),
+      home: MyHomePage(title: 'Firebase Login Test'),
+    );
+  }
+}
+
+
+final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+final GoogleSignIn googleSignIn = GoogleSignIn();
+
+class MyHomePage extends StatefulWidget {
+  MyHomePage({Key key, this.title}) : super(key: key);
+
+
+  final String title;
+
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  int _counter = 0;
+
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Colors.blueGrey),
+                ),
+                onPressed: _googleSignIn, child: Text(
+              'Google Login'
+            )),
+            Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.headline4,
+            ),
+            SizedBox(height: 30,),
+            ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Colors.blueGrey),
+                ),
+                onPressed:()=> _signUp('matheusmfaino@gmail.com','123456'),
+                child: Text(
+                'Login Email/Password'
+            )),
+            ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Colors.blueGrey),
+                ),
+                onPressed:()=> _signIn('matheusmfaino@gmail.com','123456'),
+                child: Text(
+                    'Entrar'
+                )),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+        child: Icon(Icons.add),
+      ),
+    );
+  }
+  _signInGoogle() async{
+    final GoogleSignInAccount googleUser = await googleSignIn.signIn();
+    final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+
+    final AuthCredential credential = GoogleAuthProvider.credential(
+        idToken: googleAuth.idToken,
+    accessToken: googleAuth.accessToken);
+
+    final User user  = (await firebaseAuth.signInWithCredential(credential)).user;
+  }
+  _googleSignIn() async {
+    User currentUser;
+    try {
+      final GoogleSignInAccount googleUser = await googleSignIn.signIn();
+      final GoogleSignInAuthentication googleAuth = await googleUser
+          .authentication;
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken, idToken: googleAuth.idToken,);
+      final User user = (await firebaseAuth.signInWithCredential(credential))
+          .user;
+      assert(user.email != null);
+      assert(user.displayName != null);
+      assert(!user.isAnonymous);
+      assert(await user.getIdToken() != null);
+      currentUser = firebaseAuth.currentUser;
+      assert(user.uid == currentUser.uid);
+      print(currentUser);
+      print("User Name : ${currentUser.displayName}");
+    } catch (e) {
+      print(e);
+      print(currentUser);
+      print('testeerro');
+    }
+  }
+
+
+    _signUp(email, password) async {
+    try {
+      final User user = (await firebaseAuth.createUserWithEmailAndPassword(email: email, password: password)).user;
+      assert(user != null);
+      assert(await user.getIdToken() != null);
+      var token = await user.getIdToken();
+      print(token);
+      print(user);
+    } catch (e) {
+      //handleError(e);
+      print(e);
+      //return null;
+    }
+  }
+
+  _signIn(String email, String password) async {
+    try {
+      User user = (await firebaseAuth.signInWithEmailAndPassword(email: email, password: password)).user;
+      assert(user != null);
+      assert(await user.getIdToken() != null);
+      final User currentUser = firebaseAuth.currentUser;
+      assert(user.uid == currentUser.uid);
+      print (user);
+    } catch (e) {
+      print(e);
+    }
+  }
+}
