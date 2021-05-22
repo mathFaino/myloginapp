@@ -80,8 +80,8 @@ class _FirebaseScreenState extends State<FirebaseScreen> {
      setState(() {
        isBusy = false;
        isLoggedIn = true;
-       name = currentUser.displayName;
-       picture = currentUser.photoURL;
+       name = currentUser.displayName == null ? currentUser.email : currentUser.displayName;
+       picture = currentUser.photoURL == null ? '' : currentUser.photoURL ;
      });
     } catch (e) {
       print(e);
@@ -117,8 +117,8 @@ class _FirebaseScreenState extends State<FirebaseScreen> {
       setState(() {
         isBusy = false;
         isLoggedIn = true;
-        name = user.displayName;
-        picture = user.photoURL;
+        name = user.displayName == null ? user.email : user.displayName;
+        picture = user.photoURL == null ? '' : user.photoURL ;
       });
 
     } catch (e) {
@@ -146,8 +146,8 @@ class _FirebaseScreenState extends State<FirebaseScreen> {
       setState(() {
         isBusy = false;
         isLoggedIn = true;
-        name = user.displayName;
-        picture = user.photoURL;
+        name = user.displayName == null ? user.email : user.displayName;
+        picture = user.photoURL == null ? '' : user.photoURL ;
       });
     } catch (e) {
       print(e);

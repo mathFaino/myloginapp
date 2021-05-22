@@ -20,7 +20,7 @@ class Profile extends StatelessWidget {
             shape: BoxShape.circle,
             image: DecorationImage(
               fit: BoxFit.fill,
-              image: NetworkImage(picture ?? ''),
+              image: picture==null || picture == '' ? AssetImage('images/foto.jpg'): NetworkImage(picture),
             ),
           ),
         ),

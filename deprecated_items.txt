@@ -1,0 +1,11 @@
+Note: C:\Users\mathe\Documents\development\flutter\.pub-cache\hosted\pub.dartlang.org\firebase_core-1.1.1\android\src\main\java\io\flutter\plugins\firebase\core\FlutterFirebaseCorePlugin.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: C:\Users\mathe\Documents\development\flutter\.pub-cache\hosted\pub.dartlang.org\firebase_auth-1.1.3\android\src\main\java\io\flutter\plugins\firebase\auth\FlutterFirebaseAuthPlugin.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: C:\Users\mathe\Documents\development\flutter\.pub-cache\hosted\pub.dartlang.org\flutter_appauth-1.0.0\android\src\main\java\io\crossingthestreams\flutterappauth\FlutterAppauthPlugin.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: C:\Users\mathe\Documents\development\flutter\.pub-cache\hosted\pub.dartlang.org\flutter_secure_storage-4.2.0\android\src\main\java\com\it_nomads\fluttersecurestorage\FlutterSecureStoragePlugin.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: C:\Users\mathe\Documents\development\flutter\.pub-cache\hosted\pub.dartlang.org\google_sign_in-5.0.2\android\src\main\java\io\flutter\plugins\googlesignin\GoogleSignInPlugin.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+

@@ -60,7 +60,7 @@ class LoginFirebase extends StatelessWidget {
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all(Colors.blueGrey),
             ),
-            onPressed:()=> registerE('',''),
+            onPressed:()=> registerE('matheusmrqfaino@gmail.com','123456'),
             child: Text(
                 'Register'
             )),
@@ -68,7 +68,7 @@ class LoginFirebase extends StatelessWidget {
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all(Colors.blueGrey),
             ),
-            onPressed:()=> loginActionE('',''),
+            onPressed:()=> loginActionE('matheusmrqfaino@gmail.com','123456'),
             child: Text(
                 'Login'
             )),
