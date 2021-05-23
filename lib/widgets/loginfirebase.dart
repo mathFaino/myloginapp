@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:myloginapp/models/userpeople.dart';
+import 'package:myloginapp/widgets/registerfirebasemail.dart';
 
 class LoginFirebase extends StatelessWidget {
+  LoginFirebase(this.loginActionG,this.loginActionE, this.registerE);
   final loginActionG;
   final loginActionE;
   final registerE;
 
-  const LoginFirebase(this.loginActionG,this.loginActionE, this.registerE);
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    final _formKey = GlobalKey<FormState>();
     UserPeople _userPeople = UserPeople();
     return SingleChildScrollView(
 
@@ -115,7 +117,11 @@ class LoginFirebase extends StatelessWidget {
               style: ButtonStyle(
                side: MaterialStateProperty.all(BorderSide(width: 2.5))
               ),
-              onPressed:()=> registerE('matheusmrqfaino@gmail.com','123456'),
+              onPressed:()=> Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => RegisterFirebaseMail(registerE)
+                  )
+              ),
               child: Text(
                   'Register',
                 style: TextStyle(color: Colors.black),
@@ -124,12 +130,4 @@ class LoginFirebase extends StatelessWidget {
       ),
     );
   }
-}
-
-class UserPeople {
-  String email;
-  String secret;
-  String confirmSecret;
-
-  UserPeople({this.email,this.secret,this.confirmSecret});
 }
