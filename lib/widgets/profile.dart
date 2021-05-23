@@ -9,6 +9,7 @@ class Profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
@@ -20,7 +21,9 @@ class Profile extends StatelessWidget {
             shape: BoxShape.circle,
             image: DecorationImage(
               fit: BoxFit.fill,
-              image: picture==null || picture == '' ? AssetImage('images/foto.jpg'): NetworkImage(picture),
+              image: picture == null || picture == ''
+                  ? AssetImage('images/foto.jpg')
+                  : NetworkImage(picture),
             ),
           ),
         ),
